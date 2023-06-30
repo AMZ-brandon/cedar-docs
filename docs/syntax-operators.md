@@ -615,6 +615,46 @@ Stranger::"jimmy" in [
 "os" in {"os":"Windows "}   //type error - use `has` operator to check if a key exists
 ```
 
+### `is` \(entity type test\)<a name="operator-is"></a>
+
+**Usage:** `<entity> is <entity type>`
+
+Boolean operator that evaluates to `true` if the entity referenced by the left operand is an instance of the entity type referenced by the right operand. 
+
+The following example policy uses `is` to match only principals that are of type `User`. It also matches only resources that are of type `File` and that are a member of `Folder::"public"`. 
+```
+permit(
+  principal is User,
+  action == Action::"viewFile",
+  resource is File in Folder::"public"
+);
+```
+In the previous example, the resource is checked for both its type and its group membership. If you want to check both, you must perform the checks in this order: `a is b in c::"d"`.  This syntax isn't valid: `a in c::"d" is b`.
+
+You can specify an array list of entity types, and the operator returns true if the entity is of any of the listed types. For example:
+```
+principal is [User, Group]
+resource is [File, Folder]
+```
+
+The following example policy applies to any principal, action, and resource of type `File`. It requires that the resource has the attributes `owner` and `isPrivate`. The policy forbids access to any file where the principal making the request isn't owner of the file ***and*** the file's `isPrivate` attribute is `true`.
+If the resource doesn't have these attributes, then the policy doesn't match and doesn't contribute to the authorization result.
+```
+forbid (principal, action, resource is File)
+when
+{
+  principal != resource.owner &&
+  resource.isPrivate
+};
+```
+#### Examples:
+```
+User::"alice" is User                           \\ true
+Namespace::User::"alice" is User                \\ false - the namespace is part of the type name
+Namespace::User::"alice" is Namespace::User     \\ true
+User::"alice" is Namespace::User                \\ false
+```
+
 ### `has` \(presence of attribute test\)<a name="operator-has"></a>
 
 **Usage:** `<entity> has <attribute>`

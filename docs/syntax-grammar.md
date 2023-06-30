@@ -58,26 +58,27 @@ Scope := Principal ',' Action ',' Resource
 
 The `Principal` element consists of the `principal` keyword. If specified by itself, the policy statement matches *any* principal.
 
-Optionally, the keyword can be followed by either the [`in`](syntax-operators.md#operator-in) or [`==`](syntax-operators.md#operator-equality) operator, followed by either an `Entity`, or the `?principal` placeholder when used in a policy template.
+Optionally, the keyword can be followed by either the [`in`](syntax-operators.md#operator-in) or [`==`](syntax-operators.md#operator-equality) operator, followed by either an `Entity`, or the `?principal` placeholder when used in a policy template. You can also check for the principal's entity type by using the [`is`](syntax-operators.md#operator-is) operator.
 
 ```
-Principal := 'principal' [('in' | '==') (Entity | '?principal')]
+Principal := 'principal' [('in' | '==') (Entity | '?principal') | ('is' EntityType)]
+
 ```
 
 ## `Action`<a name="grammar-action"></a>
 
-The `Action` element consists of the `action` keyword. If specified by itself, it matches any action. Optionally, it can be followed by either the [`==`](syntax-operators.md#operator-equality) operator and an action entity, or [`in`](syntax-operators.md#operator-in) followed by an action entity or a [set](syntax-datatypes.md#datatype-set) of action entities.
+The `Action` element consists of the `action` keyword. If specified by itself, it matches any action. Optionally, it can be followed by either the [`==`](syntax-operators.md#operator-equality) operator and an action entity, or [`in`](syntax-operators.md#operator-in) followed by an action entity or a [set](syntax-datatypes.md#datatype-set) of action entities. You can also check for the action's entity type by using the [`is`](syntax-operators.md#operator-is) operator.
 
 ```
-Action := 'action' [( '==' Entity | 'in' ('[' EntList ']' | Entity) )]
+Action := 'action' [( '==' Entity | 'in' ('[' EntList ']' | Entity) ) | ('is' EntityType)]
 ```
 
 ## `Resource`<a name="grammar-resource"></a>
 
-The `Resource` consists of the `resource` keyword. If specified by itself, it matches any resource. Optionally, it can be followed by either the [`in`](syntax-operators.md#operator-in) or [`==`](syntax-operators.md#operator-equality) operator, followed by an entity, or the `?resource` placeholder when used in a policy template.
+The `Resource` consists of the `resource` keyword. If specified by itself, it matches any resource. Optionally, it can be followed by either the [`in`](syntax-operators.md#operator-in) or [`==`](syntax-operators.md#operator-equality) operator, followed by an entity, or the `?resource` placeholder when used in a policy template. You can also check for the resources's entity type by using the [`is`](syntax-operators.md#operator-is) operator.
 
 ```
-Resource := 'resource' [('in' | '==') (Entity | '?resource')]
+Resource := 'resource' [('in' | '==') (Entity | '?resource') | ('is' EntityType)]
 ```
 
 ## `Condition`<a name="grammar-condition"></a>
