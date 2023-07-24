@@ -12,6 +12,7 @@ The following table describes major documentation updates for Cedar.
 
 | Cedar<br/>Version | Description | Date | 
 | --- |--- |--- |
+| 3.0 | Added [is operator](syntax-operators.md#is-entity-type-test) to all relevant topics | August 25, 2023 |
 | - | Added [Schema grammar](schema-grammar.md) topic | July 17, 2023 |
 | - | Added [Best Practices](best-practices.md) topics | July 14, 2023 |
 | - | Added [JSON policy format](json-format.md) reference page | July 14, 2023 |

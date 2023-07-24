@@ -250,7 +250,7 @@ INT := '-'? ['0'-'9']+
 ## `RESERVED`<a name="grammar-reserved"></a>
 
 ```
-RESERVED := BOOL | 'if' | 'then' | 'else' | 'in' | 'like' | 'has'
+RESERVED := BOOL | 'if' | 'then' | 'else' | 'in' | 'like' | 'has' | 'is'
 ```
 
 ## `VAR`<a name="grammar-var"></a>
